@@ -21,8 +21,10 @@ public class LoginServlet extends HttpServlet {
         User user = dao.loginUser(email, password);
 
         response.setContentType("text/html");
+        HttpSession session = request.getSession(); // session must be created here
+
         if (user != null) {
-            HttpSession session = request.getSession();
+            // Store user in session
             session.setAttribute("user", user);
 
             // Redirect based on role
@@ -30,13 +32,14 @@ public class LoginServlet extends HttpServlet {
             if ("admin".equalsIgnoreCase(user.getRole())) {
                 redirectPage = "adminDashboard.jsp";
             } else if ("teacher".equalsIgnoreCase(user.getRole())) {
-                redirectPage = "teacherDashboard.jsp"; // if you have teacher page
+                redirectPage = "teacherDashboard.jsp"; // teacher page
             }
 
-            // Login success alert
+            // Login success alert and redirect
             response.getWriter().println("<script>alert('Login Successful!'); window.location='" + redirectPage + "';</script>");
+
         } else {
-            // Invalid login alert
+            // Login failed
             response.getWriter().println("<script>alert('Invalid Email or Password!'); window.location='login.jsp';</script>");
         }
     }

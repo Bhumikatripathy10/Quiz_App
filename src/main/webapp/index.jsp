@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<<<<<<< HEAD
+=======
+<%@ page import="com.example.quiz.model.User" %>
+>>>>>>> 7aaeb35 (Initial commit on member_Manmayee branch)
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,8 +92,28 @@
 
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
+<<<<<<< HEAD
                     <li class="nav-item"><a class="nav-link" href="login.jsp"><i class="fas fa-sign-in-alt"></i> Login</a></li>
                     <li class="nav-item"><a class="nav-link" href="register.jsp"><i class="fas fa-user-plus"></i> Register</a></li>
+=======
+                    <%
+                        User loggedUser = (User) session.getAttribute("loggedUser");
+                        if (loggedUser == null) { 
+                    %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.jsp"><i class="fas fa-sign-in-alt"></i> Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="register.jsp"><i class="fas fa-user-plus"></i> Register</a>
+                        </li>
+                    <% 
+                        } else { 
+                    %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<%=request.getContextPath()%>/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </li>
+                    <% } %>
+>>>>>>> 7aaeb35 (Initial commit on member_Manmayee branch)
                 </ul>
             </div>
         </div>
@@ -101,8 +125,17 @@
             <h1>Test Your Knowledge with SmartQuiz</h1>
             <p>Join thousands of learners and challenge yourself with dynamic, timed quizzes across multiple categories. Track your performance, earn achievements, and keep improving!</p>
             <div>
+<<<<<<< HEAD
                 <a href="login.jsp" class="btn btn-custom me-3"><i class="fas fa-user-lock"></i> Login</a>
                 <a href="register.jsp" class="btn btn-custom"><i class="fas fa-user-plus"></i> Register</a>
+=======
+                <% if (loggedUser == null) { %>
+                    <a href="login.jsp" class="btn btn-custom me-3"><i class="fas fa-user-lock"></i> Login</a>
+                    <a href="register.jsp" class="btn btn-custom"><i class="fas fa-user-plus"></i> Register</a>
+                <% } else { %>
+                    <span class="btn btn-custom disabled">Welcome, <%= loggedUser.getName() %></span>
+                <% } %>
+>>>>>>> 7aaeb35 (Initial commit on member_Manmayee branch)
             </div>
         </div>
     </section>
